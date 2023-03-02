@@ -30,11 +30,52 @@ long long mul(long long a, long long b){
 
 void solve(){
 
-    // ll n;
-    // cin>>n;
-    // vector<ll> a(n);
-    // for(auto &x:a) cin>>x;
+    int n,k;
+    cin>>n>>k;
+    string s;
+    cin>>s;
 
+
+    vector<int> lower(26,0);
+    vector<int> upper(26,0);
+
+    for(auto x:s){
+
+        if(isupper(x)){
+            upper[x-'A']++;
+        }
+        else{
+            lower[x-'a']++;
+        }
+
+    }
+
+    int res=0;
+
+    for(int i=0;i<26;i++){
+        if(lower[i]>=upper[i]){
+            res += upper[i];
+            lower[i] -= upper[i];
+            upper[i] = 0;
+        }
+        else{
+            res += lower[i];
+            upper[i] -= lower[i];
+            lower[i] = 0;
+        }
+    }
+
+    int sw=0;
+
+    for(int i=0;i<26;i++){
+        int t=max(lower[i],upper[i]);
+        t /=2;
+        sw += t;
+    }
+    
+    res += min(sw,k);
+
+    cout<<res<<endl;
 
 
 

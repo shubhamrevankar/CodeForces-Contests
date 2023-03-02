@@ -28,13 +28,53 @@ long long mul(long long a, long long b){
 }
 
 
+void fun(int i,int n,vector<int> &a,int sum, stack<int> &s, int &res){
+
+    if(i==n){
+        res = max(res,sum);
+        return;
+    }
+
+    if(a[i]!=0){
+
+        s.push(a[i]);
+        fun(i+1,n,a,sum,s,res);
+        if(!s.empty())
+            s.pop();
+        fun(i+1,n,a,sum,s,res);
+
+    }
+    else{
+        int t = 0;
+        if(!s.empty()){
+            t += s.top();
+            s.pop();
+        }
+        sum += t;
+        fun(i+1,n,a,sum,s,res);
+        if(t!=0){
+            s.push(t);
+        }
+
+    }
+
+}
+
+
 void solve(){
 
-    // ll n;
-    // cin>>n;
-    // vector<ll> a(n);
-    // for(auto &x:a) cin>>x;
+    
+    int n;
+    cin>>n;
+    vector<int> a(n);
+    for(auto &x:a) cin>>x;
 
+    stack<int> s;
+    int res=0;
+    
+    fun(0,n,a,0,s,res);
+
+    cout<<res<<endl;
 
 
 

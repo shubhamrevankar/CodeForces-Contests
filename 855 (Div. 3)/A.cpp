@@ -28,12 +28,62 @@ long long mul(long long a, long long b){
 }
 
 
+string unique(string s)
+{
+    string str;
+    int len = s.length();
+    for(int i = 0; i < len; i++)
+    {
+         
+        char c = s[i];
+ 
+        auto found = str.find(c);
+        if (found == std::string::npos)
+        {
+            str += c;
+        }
+    }
+    return str;
+}
+
 void solve(){
 
-    // ll n;
-    // cin>>n;
-    // vector<ll> a(n);
-    // for(auto &x:a) cin>>x;
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
+
+    for(auto &x:s){
+        x = tolower(x);
+    }
+
+    // s = unique(s);
+
+    // // cout<<s<<endl;
+
+    // if(s == "meow"){
+    //     cout<<"YES"<<endl;
+    // }
+    // else{
+    //     cout<<"NO"<<endl;
+    // }
+    string s1;
+    s1 += s[0];
+    int j=0;
+
+    for(int i=1;i<n;i++){
+        if(s1[j]!=s[i]){
+            s1 += s[i];
+            j++;
+        }
+    }
+
+    if(s1 == "meow"){
+        cout<<"YES"<<endl;
+    }
+    else{
+        cout<<"NO"<<endl;
+    }
 
 
 
