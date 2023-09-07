@@ -30,13 +30,14 @@ long long mul(long long a, long long b){
 
 void solve(){
 
-    ll n;
-    cin>>n;
-    vector<ll> a(n);
-    for(auto &x:a) cin>>x;
+    float a,b,c;
+    cin>>a>>b>>c;
 
-    for(auto &x:a) cout<<x;
+    float d = (abs(a-b)*1.0)/2;
 
+    float ans = ceil((d*1.0)/c);
+
+    cout<<ans<<endl;
 
 
 

@@ -27,6 +27,20 @@ long long mul(long long a, long long b){
     return mod(mod(a)*mod(b));
 }
 
+void partition(vector<ll> &a, int target) {
+    ll n = a.size();
+    ll left = 0; // Index to track the left partition
+    
+    for (ll i = 0; i < n; i++) {
+        if (a[i] < target) {
+            swap(a[i], a[left]);
+            left++;
+        }
+    }
+}
+
+
+
 
 void solve(){
 
@@ -35,8 +49,23 @@ void solve(){
     vector<ll> a(n);
     for(auto &x:a) cin>>x;
 
-    for(auto &x:a) cout<<x;
+    ll res = 0 ;
 
+
+    ll i=0;
+
+    while(i<n){
+        if(a[i]==i+1){
+            i++;
+        }
+        else{
+            partition(a,a[i]);
+            res++;
+        }
+    }
+
+
+    cout<<res<<endl;
 
 
 

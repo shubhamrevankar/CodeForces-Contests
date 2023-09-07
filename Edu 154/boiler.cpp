@@ -30,12 +30,10 @@ long long mul(long long a, long long b){
 
 void solve(){
 
-    ll n;
-    cin>>n;
-    vector<ll> a(n);
-    for(auto &x:a) cin>>x;
-
-    for(auto &x:a) cout<<x;
+    // ll n;
+    // cin>>n;
+    // vector<ll> a(n);
+    // for(auto &x:a) cin>>x;
 
 
 

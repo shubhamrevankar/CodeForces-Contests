@@ -33,22 +33,6 @@ long long mul(long long a, long long b)
     return mod(mod(a) * mod(b));
 }
 
-void rec(ll i, vector<ll> &a, vector<ll> &temp, ll n, vector<vector<ll>> &v)
-{
-    if (i == n)
-    {
-        v.push_back(temp);
-        return;
-    }
-    if (temp.size() == 0 || temp.back() < a[i])
-    {
-        temp.push_back(a[i]);
-        rec(i + 1, a, temp, n, v);
-        temp.pop_back();
-    }
-    rec(i + 1, a, temp, n, v);
-}
-
 void solve()
 {
 
@@ -58,51 +42,36 @@ void solve()
     for (auto &x : a)
         cin >> x;
 
-    vector<vector<ll>> v;
-
-    vector<ll> temp;
-    rec(0, a, temp, n, v);
-
-    // for (auto x : v)
-    // {
-    //     for (auto y : x)
-    //     {
-    //         cout << y << " ";
-    //     }
-    //     cout << endl;
-    // }
-
-    ll size = v.size();
-    unordered_set<ll> s;
-
-    for (ll i = 0; i < size; i++)
+    ll mn = LLONG_MAX;
+    bool isnotthere = true;
+    ll truesh;
+    ll c = 0;
+    for (ll i = 0; i < n; i++)
     {
-        if (v[i].size() >= 2)
-            s.insert(v[i][1]);
-    }
-
-    for (auto x : v)
-    {
-        ll sz = x.size();
-        for (ll i = 0; i < sz; i++)
+        if (a[i] < mn)
         {
-            if (i != 1 && i != 0)
+            mn = a[i];
+        }
+        else
+        {
+            if (isnotthere)
             {
-                if (s.find(x[i]) != s.end())
+                isnotthere = false;
+                truesh = a[i];
+                c = 1;
+            }
+            else
+            {
+                if (a[i] < truesh)
                 {
-                    s.erase(x[i]);
+                    truesh = a[i];
+                    c++;
                 }
             }
         }
     }
 
-    // for (auto x : s)
-    // {
-    //     cout << x << " ";
-    // }
-    // cout << endl;
-
-    cout << s.size() << endl;
+    cout << c << endl;
 }
 
 int main()

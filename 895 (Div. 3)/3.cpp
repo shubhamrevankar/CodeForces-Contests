@@ -28,15 +28,44 @@ long long mul(long long a, long long b){
 }
 
 
+ll smallestNonTrivialDivisor(ll n) {
+    if (n <= 1) return -1;  // Invalid input
+    if (n <= 3) return -1;  // No non-trivial divisor for 2 and 3
+
+    if (n % 2 == 0) return 2;  // Smallest non-trivial divisor for even numbers
+
+    for (ll i = 3; i * i <= n; i += 2) {
+        if (n % i == 0) return i;
+    }
+
+    return -1;  // If no non-trivial divisor is found, return -1
+}
+
+
 void solve(){
 
-    ll n;
-    cin>>n;
-    vector<ll> a(n);
-    for(auto &x:a) cin>>x;
+    ll l,r;
+    cin>>l>>r;
 
-    for(auto &x:a) cout<<x;
+    if(l==r){
+        ll gg = smallestNonTrivialDivisor(l);
+        if(gg==-1){
+            cout<<"-1"<<endl;
+        }
+        else{
+            cout<<gg<<" "<<l-gg<<endl;
+        }
+        return;
+    }
 
+    for(ll i=l;i<=r;i++){
+        if(i!=2 && i%2==0){
+            cout<<"2 "<<i-2<<endl;
+            return;
+        }
+    }
+
+    cout<<"-1"<<endl;
 
 
 

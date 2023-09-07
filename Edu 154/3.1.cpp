@@ -31,11 +31,39 @@ long long mul(long long a, long long b){
 void solve(){
 
     ll n;
-    cin>>n;
-    vector<ll> a(n);
-    for(auto &x:a) cin>>x;
+    string s;
+    cin>>s;
+    n = s.length();
 
-    for(auto &x:a) cout<<x;
+    int status = 0; // -1 => unsorted , 0 => neutral , 1 => sorted
+
+    int c=0;
+
+    for(int i=0;i<n;i++){
+        if(s[i]=='-'){
+            c--;
+            if(c<=1) status = 0;
+        }
+        else if(s[i] == '+'){
+            c++;
+        }
+        else if(s[i]=='1'){
+            if(status==-1){
+                cout<<"NO"<<endl;
+                return;
+            }
+            if(c>1) status = 1;
+        }
+        else{
+            if(status==1 || c<=1){
+                cout<<"NO"<<endl;
+                return;
+            }
+            status = -1;
+        }
+    }
+
+    cout<<"YES"<<endl;
 
 
 

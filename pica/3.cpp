@@ -30,12 +30,34 @@ long long mul(long long a, long long b){
 
 void solve(){
 
-    ll n;
-    cin>>n;
+    ll n,k;
+    cin>>n>>k;
     vector<ll> a(n);
-    for(auto &x:a) cin>>x;
+    ll sum=0;
+    for(auto &x:a){
+        cin>>x;
+        sum += x;
+    }
 
-    for(auto &x:a) cout<<x;
+    ll missing = n*(n+1)/2 -sum;
+
+    k = k%(n+1);
+
+    a.push_back(missing);
+    n++;
+
+    ll v = (n- k)%n;
+
+
+
+
+    for(ll i=0;i<n-1;i++){
+        cout<<a[v]<<" ";
+        v = (v+1)%n;
+    }
+    cout<<endl;
+
+
 
 
 

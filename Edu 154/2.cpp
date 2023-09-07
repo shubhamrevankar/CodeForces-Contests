@@ -31,11 +31,20 @@ long long mul(long long a, long long b){
 void solve(){
 
     ll n;
-    cin>>n;
-    vector<ll> a(n);
-    for(auto &x:a) cin>>x;
+    string a,b;
+    cin>>a;
+    cin>>b;
 
-    for(auto &x:a) cout<<x;
+    n = a.length();
+
+    for(int i=0;i<n-1;i++){
+        if(a[i]=='0' && b[i]=='0' && a[i+1]=='1' && b[i+1]=='1'){
+            cout<<"YES"<<endl;
+            return;
+        }
+    }
+
+    cout<<"NO"<<endl;
 
 
 

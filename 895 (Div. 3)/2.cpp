@@ -32,10 +32,17 @@ void solve(){
 
     ll n;
     cin>>n;
-    vector<ll> a(n);
-    for(auto &x:a) cin>>x;
 
-    for(auto &x:a) cout<<x;
+    ll ans = LLONG_MAX;
+    
+    for(ll i=0;i<n;i++){
+        ll d,s;
+        cin>>d>>s;
+        ll t = d + ceil((s*1.0)/2) -1;
+        ans = min(ans,t);
+    }
+
+    cout<<ans<<endl;
 
 
 

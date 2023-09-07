@@ -33,12 +33,54 @@ void solve(){
     ll n;
     cin>>n;
     vector<ll> a(n);
-    for(auto &x:a) cin>>x;
+    for(auto &x:a){
+        ll t;
+        cin>>t;
+        x = t-1;
+    }
+    vector<ll> c(n);
+    for(auto &x:c) cin>>x;
 
-    for(auto &x:a) cout<<x;
 
+    vector<ll> ind(n,0);
+    for(int i=0;i<n;i++){
+        ind[a[i]]++;
+    }
 
+    ll count=0;
+    ll res=0;
 
+    while(count < n){
+
+        int k=0;
+        for(int i=0;i<n;i++){
+            if(ind[i]==0){
+                ind[i]=-1;
+                ind[a[i]]--;
+                res += 2*c[i];
+                k++;
+                count++;
+            }
+        }
+        if(k==0){
+            ll h=0;
+            while(h<n && a[h]!=0 && a[h]!=-1) h++;
+            ll idx=h;
+            ll inh = h;
+            h = a[h];
+            while(h!=inh){
+                if(c[h]>c[idx]) idx = h;
+                h = a[h];
+            }
+            ind[idx] = -1;
+            ind[a[idx]]--;
+            res += c[idx];
+            count++;
+        }
+
+    }
+
+    cout<<res<<endl;
 
 }
 

@@ -30,12 +30,36 @@ long long mul(long long a, long long b){
 
 void solve(){
 
-    ll n;
-    cin>>n;
-    vector<ll> a(n);
-    for(auto &x:a) cin>>x;
+    ll n,a,q;
+    cin>>n>>a>>q;
+    string s;
+    cin>>s;
 
-    for(auto &x:a) cout<<x;
+    if(a>=n){
+        cout<<"YES"<<endl;
+        return;
+    }
+    int y=0,inita=a;
+    for(int i=0;i<q;i++){
+        if(s[i]=='+'){
+            y++;
+            a++;
+        }
+        else{
+            a--;
+        }
+        if(a>=n){
+            cout<<"YES"<<endl;
+            return;
+        }
+    }
+
+    if(y+inita >=n ){
+        cout<<"MAYBE"<<endl;
+        return;
+    }
+
+    cout<<"NO"<<endl;
 
 
 

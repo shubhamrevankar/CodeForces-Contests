@@ -28,14 +28,33 @@ long long mul(long long a, long long b){
 }
 
 
+bool fun(string s,int k){
+    string t = to_string(k);
+    int j=0;
+    for(int i=0;i<10;i++){
+        if(s[i]==t[j]) j++;
+        if(j==2) break;
+    }
+
+    return j==2;
+}
+
 void solve(){
 
-    ll n;
-    cin>>n;
-    vector<ll> a(n);
-    for(auto &x:a) cin>>x;
+    ll n=10;
+    string s;
+    cin>>s;
 
-    for(auto &x:a) cout<<x;
+    int p[] = {13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
+
+    for(int i=0;i<20;i++){
+        if(fun(s,p[i])){
+            cout<<p[i]<<endl;
+            return;
+        }
+    }
+    cout<<"-1"<<endl;
+
 
 
 

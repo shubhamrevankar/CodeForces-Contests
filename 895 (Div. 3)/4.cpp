@@ -28,14 +28,57 @@ long long mul(long long a, long long b){
 }
 
 
+ 
+// Recursive function to return gcd of a and b
+long long gcd(long long int a, long long int b)
+{
+  if (b == 0)
+    return a;
+  return gcd(b, a % b);
+}
+ 
+// Function to return LCM of two numbers
+long long lcm(int a, int b)
+{
+    return (a / gcd(a, b)) * b;
+}
+
+
 void solve(){
 
-    ll n;
-    cin>>n;
-    vector<ll> a(n);
-    for(auto &x:a) cin>>x;
+    ll n,x,y;
+    cin>>n>>x>>y;
 
-    for(auto &x:a) cout<<x;
+    ll res = 0;
+
+    // ll p=1;
+    // ll q=1;
+
+    // for(ll i=1;i<=n;i++){
+    //     if((i%y==0) && (i%x!=0)){
+    //         res -= p;
+    //         p++;
+    //     }
+    //     if((i%x==0) && (i%y!=0)){
+    //         res += q;
+    //         q++;
+    //     }
+    // }
+
+    ll both = n/(lcm(x,y));
+
+    ll first = n/x - both;
+    ll second = n/y - both;
+
+    ll g = n-first;
+
+    res += (first*(first+1))/2 + g*first;
+
+    res -= (second*(second+1))/2;
+
+
+    cout<<res<<endl;
+
 
 
 
