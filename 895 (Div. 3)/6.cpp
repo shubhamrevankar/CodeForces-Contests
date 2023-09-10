@@ -28,15 +28,17 @@ long long mul(long long a, long long b){
 }
 
 
+
+
+
 void solve(){
 
     ll n;
     cin>>n;
     vector<ll> a(n);
-    for(auto &x:a){
-        ll t;
-        cin>>t;
-        x = t-1;
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+        a[i]--;
     }
     vector<ll> c(n);
     for(auto &x:c) cin>>x;
@@ -49,38 +51,64 @@ void solve(){
 
     ll count=0;
     ll res=0;
+    vector<ll> ans;
+    bool loopstart = false;
 
     while(count < n){
 
         int k=0;
-        for(int i=0;i<n;i++){
-            if(ind[i]==0){
-                ind[i]=-1;
-                ind[a[i]]--;
-                res += 2*c[i];
-                k++;
-                count++;
+        if(!loopstart){
+            for(int i=0;i<n;i++){
+                if(ind[i]==0){
+                    int j=i;
+                    while(ind[j]==0){
+                        ans.push_back(j+1);
+                        ind[j]=-1;
+                        ind[a[j]]--;
+                        res += 2*c[j];
+                        k++;
+                        count++;
+                        j=a[j];
+                    }
+                }
             }
         }
         if(k==0){
+            loopstart=true;
             ll h=0;
-            while(h<n && a[h]!=0 && a[h]!=-1) h++;
-            ll idx=h;
+            while(h<n && (ind[h]==0 || ind[h]==-1)) h++;
+            if(h==n) break;
+            ll mn = h;
             ll inh = h;
+            res += 2*c[h];
+            ind[h]=-1;
             h = a[h];
-            while(h!=inh){
-                if(c[h]>c[idx]) idx = h;
-                h = a[h];
-            }
-            ind[idx] = -1;
-            ind[a[idx]]--;
-            res += c[idx];
             count++;
+            while(h!=inh){
+                // res += 2*c[h];
+                if(c[mn]>c[h]) mn = h;
+                ind[h]=-1;
+                h = a[h];
+                count++;
+            }
+            ll mninit = mn;
+            mn = a[mn];
+
+            while(mn!=mninit){
+                ans.push_back(mn+1);
+                mn = a[mn];
+            }
+            ans.push_back(mn+1);
+
+            // res -= mn;
         }
 
     }
 
-    cout<<res<<endl;
+    for(auto x:ans){
+        cout<<x<<" ";
+    }
+    cout<<endl;
 
 }
 
