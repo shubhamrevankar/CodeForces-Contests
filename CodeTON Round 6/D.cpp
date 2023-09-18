@@ -30,46 +30,40 @@ long long mul(long long a, long long b){
 
 void solve(){
 
-    ll n;
-    string s;
-    cin>>s;
-    n = s.length();
+    ll n,k;
+    cin>>n;
+    vector<ll> c(n);
+    for(auto &x:c) cin>>x;
+    cin>>k;
 
-    int status = 0; // -1 => unsorted , 0 => neutral , 1 => sorted
+    map<ll,ll> m;
+    map<int, int,greater<int>> m1;
 
-    int c=0;
 
-    for(int i=1;i<n;i++){
-        if((s[i-1]=='0' && s[i]=='1') || s[i-1]=='1' && s[i]=='0'){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    
-    int dirtynum=-1;
-
-    for(int i=0;i<n;i++){
-        if(s[i]=='+') c++;
-        else if(s[i]=='-'){
-            c--;
-            if(c<dirtynum) dirtynum=-1;
-        }
-        else if(s[i]=='1'){
-            if(dirtynum!=-1){
-                cout<<"NO"<<endl;
-                return;
-            }
-        }
-        else{
-            if(c<=1){
-                cout<<"NO"<<endl;
-                return;
-            }
-            if(dirtynum==-1) dirtynum = c;
+    for(int i=n-1;i>=0;i--){
+        if(m.find(c[i])==m.end()){
+            m[c[i]] = i;
         }
     }
 
-    cout<<"YES"<<endl;
+    for(auto x:m){
+        ll q = k/(x.first);
+        if(q==0) break;
+        k = k%(x.first);
+        m1[x.second] = q;
+    }
+
+
+    // for(auto x:m1){
+    //     cout<<x.first<<" "<<x.second<<endl;
+    // }
+
+
+    for(auto x:m1){
+        cout<<x.first<<" "<<x.second<<endl;
+    }
+
+
 
 
 

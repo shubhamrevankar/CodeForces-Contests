@@ -30,49 +30,32 @@ long long mul(long long a, long long b){
 
 void solve(){
 
-    ll n;
-    string s;
-    cin>>s;
-    n = s.length();
+    ll n,m;
+    cin>>n>>m;
+    vector<ll> a(n);
+    for(auto &x:a) cin>>x;
+    vector<ll> b(m);
+    for(auto &x:b) cin>>x;
 
-    int status = 0; // -1 => unsorted , 0 => neutral , 1 => sorted
-
-    int c=0;
-
-    for(int i=1;i<n;i++){
-        if((s[i-1]=='0' && s[i]=='1') || s[i-1]=='1' && s[i]=='0'){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    
-    int dirtynum=-1;
-
-    for(int i=0;i<n;i++){
-        if(s[i]=='+') c++;
-        else if(s[i]=='-'){
-            c--;
-            if(c<dirtynum) dirtynum=-1;
-        }
-        else if(s[i]=='1'){
-            if(dirtynum!=-1){
-                cout<<"NO"<<endl;
-                return;
-            }
-        }
-        else{
-            if(c<=1){
-                cout<<"NO"<<endl;
-                return;
-            }
-            if(dirtynum==-1) dirtynum = c;
-        }
+    ll noop=0;
+    for(ll i=0;i<n;i++){
+        noop = noop ^ a[i];
     }
 
-    cout<<"YES"<<endl;
-
-
-
+    if(n%2==0){
+        int temp=noop;
+        for(int i=0;i<n;i++){
+            temp = temp&(~b[i]);
+        }
+        cout<<temp<<" "<<noop<<endl;
+    }
+    else{
+        int temp=noop;
+        for(int i=0;i<n;i++){
+            temp = temp|(b[i]);
+        }
+        cout<<noop<<" "<<temp<<endl;
+    }
 
 }
 

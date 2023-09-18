@@ -30,48 +30,43 @@ long long mul(long long a, long long b){
 
 void solve(){
 
-    ll n;
-    string s;
-    cin>>s;
-    n = s.length();
+    ll n,k;
+    cin>>n>>k;
+    vector<ll> a(n);
+    for(auto &x:a) cin>>x;
 
-    int status = 0; // -1 => unsorted , 0 => neutral , 1 => sorted
+    int l=0,h=n-1;
 
-    int c=0;
+    vector<ll> v(k+1,0);
 
-    for(int i=1;i<n;i++){
-        if((s[i-1]=='0' && s[i]=='1') || s[i-1]=='1' && s[i]=='0'){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    
-    int dirtynum=-1;
-
-    for(int i=0;i<n;i++){
-        if(s[i]=='+') c++;
-        else if(s[i]=='-'){
-            c--;
-            if(c<dirtynum) dirtynum=-1;
-        }
-        else if(s[i]=='1'){
-            if(dirtynum!=-1){
-                cout<<"NO"<<endl;
-                return;
+    while(l<=h){
+        if(a[l]<=a[h]){
+            if(v[a[l]]==0){
+                v[a[l]] = (h-l+1)*2;
             }
+            l++;
         }
         else{
-            if(c<=1){
-                cout<<"NO"<<endl;
-                return;
+            if(v[a[h]]==0){
+                v[a[h]] = (h-l+1)*2;
             }
-            if(dirtynum==-1) dirtynum = c;
+            h--;
         }
     }
 
-    cout<<"YES"<<endl;
+    ll mx = v[k];
 
+    for(int i=k-1;i>=1;i--){
+        mx = max(v[i],mx);
+        if(v[i] !=  0){
+            v[i] = mx;
+        }
+    }
 
+    for(int i=1;i<=k;i++){
+        cout<<v[i]<<" ";
+    }
+    cout<<endl;
 
 
 }
