@@ -16,15 +16,25 @@ void solve(){
 
     ll res=0;
 
-    ll trend=1;
+    // ll trend=1;
 
     if(a[0]>a[1]){
         res++;
-        trend=-1;
+        // trend=-1;
     }
-    ll c=1;
+    // ll c=1;
 
     for(ll i=1;i<n;i++){
+
+
+
+        
+
+
+
+
+
+
         // if((a[i]==a[i-1])||(((i+1)<n) && a[i]>a[i-1] && a[i]>a[i+1])) res++;
         // if((trend && a[i-1]>a[i]) || (!trend && a[i-1]>a[i]) || (a[i]==a[i-1]))
 
@@ -47,17 +57,17 @@ void solve(){
         //     c++;
         // }
 
-        if(a[i-1]<a[i]) trend=1;
-        else if(a[i-1]==a[i]) res++, trend=0;
-        else{
-            c++;
-            if(trend!=-1){
-                trend=-1;
-                c=0;
-            }
-            if(c==1) res++;
+        // if(a[i-1]<a[i]) trend=1;
+        // else if(a[i-1]==a[i]) res++, trend=0;
+        // else{
+        //     c++;
+        //     if(trend!=-1){
+        //         trend=-1;
+        //         c=0;
+        //     }
+        //     if(c==1) res++;
             
-        }
+        // }
     }
 
     cout<<res<<endl;
